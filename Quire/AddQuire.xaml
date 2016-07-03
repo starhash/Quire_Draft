@@ -1,0 +1,106 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Quire.AddQuire"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/White-Background-Paper3.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="45"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Margin="12,10,12,0" Grid.RowSpan="2">
+            <phone:Pivot Foreground="Black" HorizontalAlignment="Left" Height="696" Title="new quire" 
+                         VerticalAlignment="Top" Width="456" Padding="0,-7,0,0" Margin="0,2,0,0">
+                <phone:PivotItem
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Top"
+                                 Header="basic" Margin="10,0,-320,-530" Height="558" Width="436">
+                    <Grid Height="558" Width="426">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="19*"/>
+                            <RowDefinition Height="260*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="title" VerticalAlignment="Top" FontSize="30" Grid.RowSpan="2"/>
+                        <TextBox x:Name="title" HorizontalAlignment="Left" Height="72" Margin="0,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="426" BorderThickness="2" Padding="2" Grid.Row="1" SelectionForeground="#FFBFBFBF" TextChanged="title_TextChanged"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="description" VerticalAlignment="Top" FontSize="30" Grid.Row="1"/>
+                        <TextBox x:Name="description" HorizontalAlignment="Left" Height="209" Margin="0,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="426" BorderThickness="0" Grid.Row="1" TextChanged="description_TextChanged"/>
+                        <Grid x:Name="setTimeGrid" Margin="10,338,10,10" Grid.Row="1">
+                            <Slider x:Name="minutesSlider" HorizontalAlignment="Left" Margin="360,0,0,0" VerticalAlignment="Top" Width="46" Height="172" Maximum="59" SmallChange="1" LargeChange="5" Orientation="Vertical" ValueChanged="minutesSlider_ValueChanged" IsDirectionReversed="True" Foreground="#FF001FE5" Opacity="0.7"/>
+                            <TextBlock x:Name="hourSel" HorizontalAlignment="Left" Margin="0,57,0,0" TextWrapping="Wrap" Text="00"  VerticalAlignment="Top" Height="115" Width="112" FontSize="80" Opacity="0.7" Foreground="#FF43A400"/>
+                            <TextBlock x:Name="colon" HorizontalAlignment="Left" Margin="112,57,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" Height="115" Width="20" FontSize="80" Foreground="#FF9E9E9E"/>
+                            <TextBlock x:Name="minuteSel" HorizontalAlignment="Left" Margin="132,57,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Height="115" Width="106" FontSize="80" Opacity="0.7" Foreground="#FF001FE5"/>
+                            <Slider x:Name="hourSlider" HorizontalAlignment="Left" Margin="281,0,0,0" VerticalAlignment="Top" Width="46" Height="172" Minimum="1" Maximum="24" SmallChange="1" LargeChange="5" Orientation="Vertical" ValueChanged="hourSlider_ValueChanged" BorderBrush="{x:Null}" IsDirectionReversed="True" Foreground="#FF43A400" Opacity="0.7"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="242,125,0,0" TextWrapping="Wrap" Text="hour" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                                <TextBlock.RenderTransform>
+                                    <CompositeTransform Rotation="-90"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Margin="316,114,0,0" TextWrapping="Wrap" Text="minute" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                                <TextBlock.RenderTransform>
+                                    <CompositeTransform Rotation="-90"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+                        </Grid>
+                        <CheckBox x:Name="setTime" Content="set time" HorizontalAlignment="Left" Margin="0,333,0,0" VerticalAlignment="Top" Height="72" Width="291" Grid.Row="1" BorderThickness="0" Opacity="0.9" Unchecked="setTime_Unchecked" Checked="setTime_Checked" BorderBrush="Black" Foreground="Black" Background="#FF575757"/>
+
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem 
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Top"
+                                 Header="advanced" Margin="10,0,-320,-530" Height="558" Width="436">
+                    <ScrollViewer
+                        HorizontalContentAlignment="Left"
+                        Height="548" Width="426">
+                        <Grid Height="548">
+
+                            <toolkit:ToggleSwitch x:Name="urgentToggle" Background="#FF474747" BorderBrush="Black" Foreground="Black" SwitchForeground="#FF0036C7" FontFamily="Segoe WP" Content="Urgent?" Checked="urgentToggle_Checked" Unchecked="urgentToggle_Unchecked" />
+                            <toolkit:TimePicker x:Name="timePicker" Margin="0,83,0,394" Foreground="Black" BorderBrush="{x:Null}" FontFamily="Segoe WP Light" ValueChanged="timePicker_ValueChanged" />
+                            <toolkit:DatePicker x:Name="datePicker" Margin="0,154,0,327" Foreground="Black" BorderBrush="{x:Null}" FontFamily="Segoe WP Light" ValueChanged="datePicker_ValueChanged" />
+                            <toolkit:AutoCompleteBox x:Name="shareAuto" Margin="0,276,78,190" BorderBrush="{x:Null}" Background="#BFF9F9F9" BorderThickness="2" FontFamily="Segoe WP Light" TextChanged="shareAuto_TextChanged" />
+                            <TextBlock HorizontalAlignment="Left" Margin="10,231,0,0" TextWrapping="Wrap" Text="Share with :" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe WP Light"/>
+                            <Button 
+                                
+                                Content="" HorizontalAlignment="Left" Margin="333,276,0,0" VerticalAlignment="Top" Height="82" Width="83" BorderBrush="{x:Null}" Tap="Button_Tap">
+                                <Button.Background>
+                                    <ImageBrush Stretch="Fill" ImageSource="/Icons/new.png"/>
+                                </Button.Background>
+                            </Button>
+                            <TextBlock x:Name="sharedUsers" Margin="10,363,10,0" FontSize="24" />
+                        </Grid>
+                    </ScrollViewer>
+                </phone:PivotItem>
+            </phone:Pivot>
+        </Grid>
+        <ProgressBar x:Name="addQuireProgress" HorizontalAlignment="Left" Height="10" Margin="10,0,0,0" VerticalAlignment="Top" Width="458"/>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar BackgroundColor="Black">
+            <shell:ApplicationBarIconButton 
+                x:Name="addQuire" 
+                Text="add quire" 
+                IconUri="/Icons/new.png" Click="addQuire_Click" />
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
